@@ -1,5 +1,5 @@
 @extends('layouts.default')
 
 @section('content')
-    <h1>Pueblos México</h1>
+
 @stop
