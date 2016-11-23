@@ -16,7 +16,7 @@ class AuthController extends Controller
      */
     public function index()
     {
-      return view('auth');
+      return view('auth.index');
     }
 
     /**
@@ -47,7 +47,7 @@ class AuthController extends Controller
         return redirect()->route('auth_show_path')->withErrors('No encontramos al usuario');
       }
 
-      return 'Listo';
+      return redirect()->route('index');
     }
 
     /**

@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests;
 
-use App\Post;
+use App\User;
 
-class PostsController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,7 +29,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+      return view('users.register');
     }
 
     /**
@@ -40,24 +40,32 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-      $validator = Validator::make($request->all(), [
-        'title' => 'required',
-        'body' => 'required',
+      $validator = Validator::make($request->all(),[
+        'first_name' => 'required',
+        'last_name' => 'required',
+        'email' => 'required|email|unique:users',
+        'password' => 'required|min:5|confirmed',
+        'password_confirmation'=> 'required|min:5'
       ]);
 
-      if($validator->fails()) {
-        return redirect()->route('post_create_path')
+      if($validator->fails()){
+        return redirect()
+          ->route('register_create_path')
           ->withInput()
           ->withErrors($validator);
       }
 
-      $post = Post::create([
-        'user_id' => Auth::id(),
-        'title' => $request->title,
-        'body' => $request->body,
+      $user = User::create([
+        'first_name' => $request->first_name,
+        'last_name' => $request->last_name,
+        'email' => $request->email,
+        'password' => bcrypt($request->password),
+        'active' => 1
       ]);
 
-      return redirect()->route('post_show_path', $post->id);
+      Auth::attempt($request->only(['email', 'password']));
+
+      return redirect()->route('index');
     }
 
     /**
@@ -68,10 +76,7 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-      $post = Post::findOrFail($id);
-
-      return view('posts.show')
-        ->with('post', $post);
+        //
     }
 
     /**
@@ -82,10 +87,7 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-      $post = Post::findOrFail($id);
-
-      return view('posts.edit')
-        ->with('post', $post);
+        //
     }
 
     /**
@@ -97,14 +99,7 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $post = Post::findOrFail($id);
-
-      $post->user_id = Auth::id();
-      $post->title = $request->get('title');
-      $post->body = $request->get('body');
-      $post->save();
-
-      return redirect()->route('post_show_path', $post->id);
+        //
     }
 
     /**
@@ -115,6 +110,6 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-      return Post::delete($id);
+        //
     }
 }

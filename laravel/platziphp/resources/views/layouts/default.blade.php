@@ -7,8 +7,12 @@
 </head>
 <body>
   @if($currentUser)
+    Hola, {{ $currentUser->first_name }} {{ $currentUser->last_name }}
+    |
     <a href="{{ route('auth_destroy_path') }}">Salir</a>
   @else
+    <a href="{{ route('register_create_path') }}">Registro</a>
+    |
     <a href="{{ route('auth_show_path') }}">Iniciar Sesión</a>
   @endif
 

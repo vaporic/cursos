@@ -5,16 +5,7 @@
     <div class="col-sm-6 col-sm-offset-3">
       <h3 class="text-center">INICIAR SESIÓN</h3>
 
-      @if($errors->has())
-        <div class="alert alert-danger alert-dismissible" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <ul class="list-unstyled">
-            @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-            @endforeach
-          </ul>
-        </div>
-      @endif
+      @include('partials.errors')
 
       <form action="{{ route('auth_store_path') }}" method="post">
         {{ csrf_field() }}
