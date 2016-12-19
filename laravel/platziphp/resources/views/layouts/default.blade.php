@@ -1,20 +1,18 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <!-- Required meta tags always come first -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+
   <title>Pueblos México</title>
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
   <link rel="stylesheet" href="{{ elixir('css/app.css') }}"/>
   @yield('css')
 </head>
 <body>
-  @if($currentUser)
-    Hola, {{ $currentUser->first_name }} {{ $currentUser->last_name }}
-    |
-    <a href="{{ route('auth_destroy_path') }}">Salir</a>
-  @else
-    <a href="{{ route('register_create_path') }}">Registro</a>
-    |
-    <a href="{{ route('auth_show_path') }}">Iniciar Sesión</a>
-  @endif
+  @include('partials.header')
 
   @yield('content')
 

@@ -7,8 +7,9 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests;
-
 use App\User;
+use Mail;
+
 
 class UsersController extends Controller
 {
@@ -62,6 +63,11 @@ class UsersController extends Controller
         'password' => bcrypt($request->password),
         'active' => 1
       ]);
+
+      // Send Welcome Email
+      /*Mail::send('emails.register', ['first_name' => $user->first_name, 'last_name' => $user->first_name], function(Message $message){
+        $message->to('vaporic@gmail.com')->subject('Welcome');
+      });*/
 
       Auth::attempt($request->only(['email', 'password']));
 

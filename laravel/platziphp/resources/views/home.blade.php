@@ -3,7 +3,6 @@
 @section('content')
     <div class="container">
       <div class="col-sm-12">
-        <h1>Pueblos México</h1>
         @if($currentUser)
           <a class="btn btn-primary" href="{{ route('post_create_path') }}">Crear Post</a>
         @endif
