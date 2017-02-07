@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Curso React</title>
+</head>
+<body>
+<main id="app"></main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.1/react-dom.min.js" integrity="sha256-xILqnGjl9PnNr5R9qqxrk894h/RY5H+4kpk6dNEkz6Q=" crossorigin="anonymous"></script>
+<script>
+  function Hola(props) {
+    const name = props.name;
+
+    return React.DOM.h1({
+      id: 'Title',
+    }, `Hola ${name}`);
+  }
+
+  const hola = React.createElement(Hola, {
+    name: 'Platzi',
+  });
+
+  ReactDOM.render(
+    hola,
+    document.getElementById('app')
+  );
+</script>
+</body>
+</html>
